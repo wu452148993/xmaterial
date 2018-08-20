@@ -483,9 +483,9 @@ public enum IMaterial {
 	public static int fromMaterial(String mat){
 		String imat = "";
 		try{
-			imat = XMaterial.XfromString(mat).toString();
+			imat = XMaterial.XfromString(mat).m;//toString();
 			return IMaterial.valueOf(imat).id;
-		}catch(IllegalArgumentException e){
+		}catch(IllegalArgumentException|NullPointerException e){
 			return 0;
 		}
 	}
