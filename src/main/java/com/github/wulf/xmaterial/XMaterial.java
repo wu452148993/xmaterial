@@ -881,6 +881,29 @@ public enum XMaterial {
 	 */
 	public static XMaterial XfromString(String key){
 		XMaterial xmat = null;
+		int ty = 0;
+		if(key.contains(":")) {
+			String[] split = key.split(":");
+			key = split[0];
+			try {
+				ty = Integer.parseInt(split[1]);
+			}catch(NumberFormatException nfe) {
+				ty = 0;
+			}
+		}
+		try{
+			xmat = XMaterial.valueOf(key);
+			return xmat;
+		}catch(IllegalArgumentException e){
+			xmat = requestXMaterial(key,(byte) 0);
+			if(!isDamageable(xmat))
+			{
+				xmat = requestXMaterial(key,(byte) ty);
+			}		
+			return xmat;
+		}	
+			
+/*		XMaterial xmat = null;
 		try{
 			xmat = XMaterial.valueOf(key);
 			return xmat;
@@ -892,7 +915,7 @@ public enum XMaterial {
 				xmat = requestXMaterial(split[0],(byte) Integer.parseInt(split[1]));
 			}
 			return xmat;
-		}	
+		}	*/
 	}
 	
 	/*

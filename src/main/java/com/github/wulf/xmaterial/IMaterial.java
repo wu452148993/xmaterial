@@ -445,7 +445,11 @@ public enum IMaterial {
 			if(split.length == 1){
 				xmat = XMaterial.requestXMaterial(requestIMaterial(idkey).toString(),(byte) 0);
 			}else{
-				xmat = XMaterial.requestXMaterial(split[0],(byte) Integer.parseInt(split[1]));
+				xmat = XMaterial.requestXMaterial(split[0],(byte) 0);
+				if(!XMaterial.isDamageable(xmat))
+				{
+					xmat = XMaterial.requestXMaterial(split[0],(byte) Integer.parseInt(split[1]));
+				}		
 			}
 			return xmat;
 		}catch(IllegalArgumentException e){
@@ -491,4 +495,12 @@ public enum IMaterial {
 		}
 	}
 	
+	public static IMaterial fromXMaterial(XMaterial Xmat){
+		try{
+			return IMaterial.valueOf(Xmat.m);
+		}catch(IllegalArgumentException e)
+		{
+			return null;
+		}
+	}
 }
