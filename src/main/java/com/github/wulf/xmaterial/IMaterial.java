@@ -437,14 +437,15 @@ public enum IMaterial {
 	 */
 	public static XMaterial XfromID(String idkey){
 		XMaterial xmat = null;
-		String imat = "";
+		//String imat = "";
+		String[] split = idkey.split(":");		
 		try{
-			imat = requestIMaterial(idkey).toString();
-			String[] split = idkey.split(":");
+			//imat = requestIMaterial(idkey).toString();
+			//String[] split = idkey.split(":");
 			if(split.length == 1){
-				xmat = XMaterial.requestXMaterial(imat,(byte) 0);
+				xmat = XMaterial.requestXMaterial(requestIMaterial(idkey).toString(),(byte) 0);
 			}else{
-				xmat = XMaterial.requestXMaterial(imat,(byte) Integer.parseInt(split[1]));
+				xmat = XMaterial.requestXMaterial(split[0],(byte) Integer.parseInt(split[1]));
 			}
 			return xmat;
 		}catch(IllegalArgumentException e){
