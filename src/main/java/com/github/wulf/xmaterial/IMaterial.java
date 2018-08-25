@@ -68,6 +68,7 @@ public enum IMaterial {
     SOIL(60),
     FURNACE(61),
     BURNING_FURNACE(62),
+    SIGN_POST(63),
     WOODEN_DOOR(64),
     LADDER(65),
     RAILS(66),
