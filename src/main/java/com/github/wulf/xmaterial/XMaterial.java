@@ -970,6 +970,14 @@ public enum XMaterial {
         return Material.matchMaterial(m);
     }
 	
+	public IMaterial parseIMaterial(){
+		try{
+			return IMaterial.valueOf(this.m);
+		}catch(IllegalArgumentException e)
+		{
+			return null;
+		}
+	}
 	/*
 	 * 
 	 * *将Material转换为XMaterial

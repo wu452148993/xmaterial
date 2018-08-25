@@ -495,12 +495,4 @@ public enum IMaterial {
 		}
 	}
 	
-	public static IMaterial fromXMaterial(XMaterial Xmat){
-		try{
-			return IMaterial.valueOf(Xmat.m);
-		}catch(IllegalArgumentException e)
-		{
-			return null;
-		}
-	}
 }
