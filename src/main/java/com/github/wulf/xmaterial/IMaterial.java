@@ -496,4 +496,12 @@ public enum IMaterial {
 		}
 	}
 	
+	public static int fromXMaterial(XMaterial Xmat){
+		try{
+			return IMaterial.valueOf(Xmat.m).id;
+		}catch(IllegalArgumentException|NullPointerException e){
+			return 0;
+		}
+	}
+	
 }
