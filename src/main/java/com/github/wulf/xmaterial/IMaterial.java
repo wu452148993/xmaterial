@@ -446,10 +446,15 @@ public enum IMaterial {
 			if(split.length == 1){
 				xmat = XMaterial.requestXMaterial(requestIMaterial(idkey).toString(),(byte) 0);
 			}else{
-				xmat = XMaterial.requestXMaterial(split[0],(byte) 0);
-				if(!XMaterial.isDamageable(xmat))
+				String S_mat = requestIMaterial(split[0]).toString();
+				xmat = XMaterial.requestXMaterial(S_mat,(byte) 0);
+				if(xmat != null && !XMaterial.isDamageable(xmat))
 				{
-					xmat = XMaterial.requestXMaterial(split[0],(byte) Integer.parseInt(split[1]));
+					XMaterial tem_xmat = XMaterial.requestXMaterial(S_mat,(byte) Integer.parseInt(split[1]));
+					if(tem_xmat != null)
+					{
+						xmat = tem_xmat;
+					}
 				}		
 			}
 			return xmat;

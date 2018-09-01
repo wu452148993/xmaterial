@@ -898,9 +898,13 @@ public enum XMaterial {
 			return xmat;
 		}catch(IllegalArgumentException e){
 			xmat = requestXMaterial(key,(byte) 0);
-			if(!isDamageable(xmat))
+			if(xmat !=null && !isDamageable(xmat))
 			{
-				xmat = requestXMaterial(key,(byte) ty);
+				XMaterial tem_xmat = requestXMaterial(key,(byte) ty);
+				if(tem_xmat != null)
+				{
+					xmat = tem_xmat;
+				}
 			}		
 			return xmat;
 		}	
