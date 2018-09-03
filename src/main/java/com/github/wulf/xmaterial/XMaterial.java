@@ -931,6 +931,7 @@ public enum XMaterial {
 		try {
 			return (XMaterial.XfromString(key)).parseMaterial();
 		}catch(NullPointerException e){
+			System.out.print("XMaterial:this type don't have Material");
 			return Material.STONE;
 		}
 	}
@@ -998,6 +999,9 @@ public enum XMaterial {
 					return xmat;
 				}
 			}
+		}catch(NullPointerException e){
+			System.out.print("XMaterial:fromMaterial must have parm");
+			return null;
 		}
 		return null;
 	}

@@ -440,27 +440,27 @@ public enum IMaterial {
 		XMaterial xmat = null;
 		//String imat = "";
 		String[] split = idkey.split(":");		
-		try{
+		//try{
 			//imat = requestIMaterial(idkey).toString();
 			//String[] split = idkey.split(":");
-			if(split.length == 1){
-				xmat = XMaterial.requestXMaterial(requestIMaterial(idkey).toString(),(byte) 0);
-			}else{
-				String S_mat = requestIMaterial(split[0]).toString();
-				xmat = XMaterial.requestXMaterial(S_mat,(byte) 0);
-				if(xmat != null && !XMaterial.isDamageable(xmat))
+		if(split.length == 1){
+			xmat = XMaterial.requestXMaterial(requestIMaterial(idkey).toString(),(byte) 0);
+		}else{
+			String S_mat = requestIMaterial(split[0]).toString();
+			xmat = XMaterial.requestXMaterial(S_mat,(byte) 0);
+			if(xmat != null && !XMaterial.isDamageable(xmat))
+			{
+				XMaterial tem_xmat = XMaterial.requestXMaterial(S_mat,(byte) Integer.parseInt(split[1]));
+				if(tem_xmat != null)
 				{
-					XMaterial tem_xmat = XMaterial.requestXMaterial(S_mat,(byte) Integer.parseInt(split[1]));
-					if(tem_xmat != null)
-					{
-						xmat = tem_xmat;
-					}
-				}		
-			}
-			return xmat;
-		}catch(IllegalArgumentException e){
-			return null;
-		}	
+					xmat = tem_xmat;
+				}
+			}		
+		}
+		return xmat;
+		//}catch(IllegalArgumentException e){
+		//	return null;
+		//}	
 	}
 	
 	
@@ -486,6 +486,7 @@ public enum IMaterial {
 		try {
 			return (IMaterial.XfromID(idkey)).parseMaterial();
 		}catch(NullPointerException e){
+			System.out.print("IMaterial:idkey can't is null");
 			return Material.STONE;
 		}
 	}
@@ -497,6 +498,7 @@ public enum IMaterial {
 			imat = XMaterial.XfromString(mat).m;//toString();
 			return IMaterial.valueOf(imat).id;
 		}catch(IllegalArgumentException|NullPointerException e){
+			System.out.print("IMaterial:this mat(String) can't get id");
 			return 0;
 		}
 	}
@@ -504,7 +506,11 @@ public enum IMaterial {
 	public static int fromXMaterial(XMaterial Xmat){
 		try{
 			return IMaterial.valueOf(Xmat.m).id;
-		}catch(IllegalArgumentException|NullPointerException e){
+		}catch(IllegalArgumentException e){
+			System.out.print("IMaterial:this XMaterial can't get id");
+			return 0;
+		}catch(NullPointerException e){
+			System.out.print("IMaterial:this XMaterial can't is null");
 			return 0;
 		}
 	}
